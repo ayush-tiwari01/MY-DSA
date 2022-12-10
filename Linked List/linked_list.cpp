@@ -1,4 +1,5 @@
 #include <iostream>
+#include<map>
 using namespace std;
 class Node
 {
@@ -100,6 +101,21 @@ void deletenode(int position, Node *&head)
         delete curr;
     }
 }
+bool detectloop(node* head){
+    if(head==NULL){
+        return false;
+    }
+    map<node*,bool>visited;
+    node*temp=head;
+    while(temp!=NULL){
+        if(visited[temp]==true){
+            return true;
+        }
+        visited[temp]=true;
+        temp=temp->next;
+    }
+    return false;
+}
 int main()
 {
     Node *node1 = new Node(10);
@@ -114,11 +130,12 @@ int main()
     insertattail(tail, 15);
      insertattail(tail, 25);
       insertattail(tail, 30);
+      
     // print(head);
     // insertatposition(tail,head,4,22);
-    print(head);
-    deletenode(3, head);
-     print(head);
+    // print(head);
+   // deletenode(3, head);
+    //  print(head);
     // cout<<"Head-: "<<head->data<<endl;
     // cout<<"Tail-: "<<tail->data<<endl;
 }

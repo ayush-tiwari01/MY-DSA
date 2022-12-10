@@ -1,4 +1,5 @@
 #include<iostream>
+#include<map>
 using namespace std;
 class node{
     public:
@@ -77,7 +78,78 @@ void deletenode(node* &tail, int value){
     }
     
 }
+bool iscircular(node* head){
+    if(head==NULL){
+        return false;
+    }
+    node*temp=head->next;
+    while(temp!=NULL && temp!=head){
+        temp=temp->next;
+    }
+    if(temp==head){
+        return true;
+    }
+    if(temp==NULL){
+        return false;
+    }
+
+}
+bool detectloop(node* head){
+    if(head==NULL){
+        return false;
+    }
+    map<node*,bool>visited;
+    node*temp=head;
+    while(temp!=NULL){
+        if(visited[temp]==true){
+            return true;
+        }
+        visited[temp]=true;
+        temp=temp->next;
+    }
+    return false;
+}
+node* floyddetectionloop(node* head){
+    if(head==NULL){
+        return NULL;
+    }
+    node*slow=head;
+    node*fast=head;
+    while(slow!=NULL && fast!=NULL){
+        fast=fast->next;
+        if(fast!=NULL){
+            fast=fast->next;
+        }
+        slow=slow->next;
+        if(slow==fast){
+            cout<<"present at"<<slow->data<<endl;
+        }
+    }
+    return NULL;
+}
+node* getstartingnode(node*head){
+    if(head==NULL)
+    return NULL;
+    node* intersection = floyddetectionloop(head);
+    node*slow=head;
+    while(slow!=intersection){
+        slow=slow->next;
+        intersection=intersection->next;
+    }
+    return slow;
+}
+void removeloop(node* head){
+    if(head==NULL)
+    return;
+    node* startOfLoop=getstartingnode(head);
+    node*temp=startOfLoop;
+    while(temp->next!=startOfLoop){
+        temp=temp->next;
+    }
+    temp->next=NULL;
+}
 int main(){
+
     node*tail =NULL;
     insertnode(tail,5,3);
     print(tail);
@@ -86,8 +158,21 @@ int main(){
     insertnode(tail,10,30);
     insertnode(tail,30,40);
     print(tail);
-    deletenode(tail,3);
-    print(tail);
+    //deletenode(tail,3);
+    //print(tail);
+
+    if(iscircular(tail)){
+        cout<<"link list is the circular"<<endl;
+    }
+    else{
+        cout<<"bhai link list is not circular"<<endl;
+    }
+     if(iscircular(tail)){
+        cout<<"link list is the circular"<<endl;
+    }
+    else{
+        cout<<"bhai link list is not circular"<<endl;
+    }
     return 0;
     
 }
