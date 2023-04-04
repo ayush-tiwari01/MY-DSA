@@ -48,58 +48,65 @@ void print(node* &head){
     }
     cout<<endl;
 }
-node* getmiddle(node* head){
-    if(head==NULL || head->next==NULL){
-     return head;
+void  uniqueSortedList(node * head) {
+    if(head==NULL){
+    //return NULL;
     }
-    // 2 node 
-    if(head->next->next==NULL){
-      return head->next;
+    node* curr = head;
+    while(curr != NULL){
+    if(curr->data==curr->next->data && (curr->next!=NULL)){
+        node* next_next=curr -> next -> next;
+        node* to_delete=curr -> next;
+        delete(to_delete);
+        curr -> next=next_next;
     }
-    node* fast=head->next;
-    node* slow=head;
-    while(fast!=NULL){
-   fast=fast->next;
-        if(fast!=NULL){
-      fast=fast->next;
+        else{
+            curr=curr -> next;
         }
-        slow=slow->next;
-    }
-    return slow;
 }
-void sort(node* &head){
-    node* temp=head;
-    node* forward=head->next;
-    while(temp!=NULL){
-        if(temp->data>forward->data){
-            node* curr;
-            curr->data=temp->data;
-            forward->data=curr->data;
-
-            curr->data=forward->data;
-            if(temp!=NULL){
-            temp=forward;
-            forward=forward->next;
-        }
-        }
+node* temp=head;
+while(temp!=NULL){
+    cout<<temp->data<<" ";
+    temp=temp->next;
+}cout<<endl;
+    
+}
+void reverselinklist(node* &head){
+    if(head==NULL || head->next==NULL){
+        // return head;
     }
+    node* prev=NULL;
+    node*curr=head;
+    node*forward=NULL;
+    while(curr!=NULL){
+        forward=curr->next;
+        curr->next=prev;
+        prev=curr;
+        curr=forward;
+    }
+    // return prev;
+    node*temp=prev;
+    while(prev!=NULL){
+        cout<<prev->data<<" ";
+        prev=prev->next;
+    }cout<<endl;
+
 }
 int main(){
     node* node1=new node(3);
     node*tail=node1;
     node*head=node1;
     insertionathead(head,5);
-    insertionathead(head,7);
+    insertionathead(head,5);
     insertionathead(head,9);
     insertionathead(head,10);
     print(head);
     //insertionatposition(tail,head,1,15);
+    //print(head);
+    //reverselinklist(head);
     // print(head);
-    // node* temp;
-    //  cout<<getmiddle(head);
-     sort(head);
-     print(head);
-    // print(head);
+  uniqueSortedList(head);
+
 
 
 }

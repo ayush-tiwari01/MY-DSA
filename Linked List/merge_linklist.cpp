@@ -101,6 +101,40 @@ void deletenode(int position, Node *&head)
         delete curr;
     }
 }
+void reverse(Node* &head){
+    Node*curr=head;
+    Node* prev=NULL;
+    while(curr!=NULL){
+        Node* forward=curr->next;
+        curr->next=prev;
+        prev=curr;
+        curr=forward;
+    }
+}
+void mergeLL(Node* &head1,Node* &head2){
+    Node* p=head1;
+    Node* q=head2;
+    Node* head3=NULL;
+    while(p!=NULL && q!=NULL){
+        if(p->data<q->data){
+            insertathead(head3,p->data);
+            p=p->next;
+        }
+        else{
+            insertathead(head3,p->data);
+            p=p->next;
+        }
+    }
+    while(p!=NULL){
+        insertathead(head3,p->data);
+            p=p->next;
+    }
+    while(q!=NULL){
+        insertathead(head3,q->data);
+            q=q->next; 
+    }
+
+}
 int main()
 {
     Node *node1 = new Node(10);
@@ -115,12 +149,14 @@ int main()
     insertattail(tail, 15);
      insertattail(tail, 25);
       insertattail(tail, 30);
-      
     // print(head);
     // insertatposition(tail,head,4,22);
     // print(head);
    // deletenode(3, head);
-    //  print(head);
+     print(head);
+     reverse(head);
+    //  cout<<ans<<endl;
+     print(head);
     // cout<<"Head-: "<<head->data<<endl;
     // cout<<"Tail-: "<<tail->data<<endl;
 }

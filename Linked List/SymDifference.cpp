@@ -101,26 +101,81 @@ void deletenode(int position, Node *&head)
         delete curr;
     }
 }
+void reverse(Node* &head){
+    Node*curr=head;
+    Node* prev=NULL;
+    while(curr!=NULL){
+        Node* forward=curr->next;
+        curr->next=prev;
+        prev=curr;
+        curr=forward;
+    }
+      Node *temp = prev;
+    while (temp != NULL)
+    {
+        cout << prev->data << " ";
+        prev = prev->next;
+    }
+    cout << endl;
+}
+void SymDiffernceLL(Node* &head1,Node* &head2){
+    Node* p=head1;
+    Node* q=head2;
+    Node* head3=NULL;
+    while(p!=NULL && q!=NULL){
+        if(p->data<q->data){
+            insertathead(head3,p->data);
+            p=p->next;
+        }
+        else if(p->data>q->data){
+            insertathead(head3,q->data);
+            q=q->next;
+        }
+        else{
+            // insertathead(head3,p->data);
+            p=p->next;
+            q=q->next;
+        }
+    }
+    while(p!=NULL){
+        insertathead(head3,p->data);
+            p=p->next;
+    }
+    while(q!=NULL){
+        insertathead(head3,q->data);
+            q=q->next; 
+    }
+
+}
 int main()
 {
     Node *node1 = new Node(10);
+    Node *node2= new Node(1);
     // cout<<node1->data<<endl;
     // cout<<node1->next<<endl;
     // head pointed to node1
-    Node *head = node1;
-    Node *tail = node1;
+    Node *head1 = node1;
+    Node *tail1 = node1;
+     Node *head2 = node2;
+    Node *tail2 = node2;
+    insertathead(head1,1);
+    insertathead(head1,2);
+    insertathead(head1,3);
+
+     print(head1);
+    // insertattail(tail1, 12);
     // print(head);
-    insertattail(tail, 12);
-    // print(head);
-    insertattail(tail, 15);
-     insertattail(tail, 25);
-      insertattail(tail, 30);
-      
+    // insertattail(tail1, 15);
+    //  insertattail(tail1, 25);
+    //   insertattail(tail1, 30);
     // print(head);
     // insertatposition(tail,head,4,22);
     // print(head);
    // deletenode(3, head);
-    //  print(head);
+     //print(head1);
+     reverse(head1);
+    //  cout<<ans<<endl;
+     //print(head1);
     // cout<<"Head-: "<<head->data<<endl;
     // cout<<"Tail-: "<<tail->data<<endl;
 }

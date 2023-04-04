@@ -45,7 +45,7 @@ void quicksort(int *arr, int s, int e){
     quicksort(arr,p+1,e);
 }
 int main(){
-    int arr[5]={1,9,2,78,3};
+    int arr[5]={8,5,2,4,9};
     int n=5;
     printarray(arr,5);
     quicksort(arr,0,4);
